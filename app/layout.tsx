@@ -1,15 +1,29 @@
+import Footer from "@/components/layout/Footer";
+import NavBar from "@/components/layout/NavBar";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+// Local font imports from /public/fonts
+const suisse = localFont({
+  src: [
+    { path: "../public/fonts/SuisseMedium.ttf", weight: "500", style: "normal" },
+    { path: "../public/fonts/SuisseBold.ttf", weight: "700", style: "normal" },
+  ],
+  variable: "--font-suisse",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const suisseMono = localFont({
+  src: "../public/fonts/SuisseMono.ttf",
+  variable: "--font-suisse-mono",
+  display: "swap",
+});
+
+const tempting = localFont({
+  src: "../public/fonts/Tempting.ttf",
+  variable: "--font-tempting",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -25,9 +39,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${suisse.variable} ${suisseMono.variable} ${tempting.variable} antialiased`}
       >
+        <NavBar />
         {children}
+        <Footer />
       </body>
     </html>
   );
