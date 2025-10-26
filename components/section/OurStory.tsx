@@ -5,7 +5,7 @@ export default function OurStory(): React.ReactElement {
     return (
         <section className="mx-auto py-28 bg-secondary min-h-screen">
             <div className="max-w-[1440px] mx-auto grid grid-cols-12 gap-8">
-                <div className="col-span-4">
+                <div className="hidden lg:flex col-span-4">
                     <div className="w-full h-full relative overflow-hidden">
                         <Image
                             src="/imgs/story1.webp"
@@ -17,7 +17,7 @@ export default function OurStory(): React.ReactElement {
                     </div>
                 </div>
 
-                <div className="col-span-8">
+                <div className="col-span-12 md:col-span-8 px-2">
                     <p className="text-sm text-primary font-sans font-semibold mb-2 font-suisse-mono">
                         Adornment of Promise
                     </p>
@@ -28,7 +28,7 @@ export default function OurStory(): React.ReactElement {
                         <br /> ROOTED IN TRADITION
                     </h2>
                     <div className="flex gap-8">
-                        <div className="flex flex-col justify-between">
+                        <div className="flex flex-col justify-between gap-6">
                             <p className="text-xl text-gray-300 max-w-prose">
                                 From the gown that carries her presence to the veil, jewelry, and shoes
                                 that complete the look, every element is chosen to serve the bride&apos;s
@@ -44,7 +44,7 @@ export default function OurStory(): React.ReactElement {
                             </p>
                         </div>
 
-                        <div className="w-full relative overflow-hidden">
+                        <div className="hidden lg:flex w-full relative overflow-hidden">
                             <Image
                                 src="/imgs/story2.webp"
                                 alt="Gown on Display"

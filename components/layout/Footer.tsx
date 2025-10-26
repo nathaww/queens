@@ -4,7 +4,7 @@ const Footer = (): React.ReactElement => {
 
   return (
     <footer className="w-full bg-secondary text-white">
-      <div className="max-w-[1440px] mx-auto px-6 py-32">
+      <div className="max-w-[1440px] mx-auto px-6 py-12 lg:py-32">
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="space-y-8">
@@ -23,7 +23,7 @@ const Footer = (): React.ReactElement => {
                 <span>info@queensbridal.com</span>
               </div>
             </div>
-            <div className="grid grid-cols-5 text-white/70 underline underline-offset-2 font-suisse-mono uppercase">
+            <div className="grid lg:grid-cols-5 text-white/70 underline underline-offset-2 font-suisse-mono uppercase">
               <span>Facebook</span>
               <span>Linkedin</span>
               <span>Instagram</span>

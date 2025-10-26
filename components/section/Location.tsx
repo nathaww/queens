@@ -9,7 +9,7 @@ export default function Location(): React.ReactElement {
 
     return (
         <section className="w-full bg-secondary relative">
-            <div className="bg-background min-h-screen rounded-b-[6rem] h-full flex flex-col gap-8">
+            <div className="bg-background lg:min-h-screen rounded-b-[6rem] h-full flex flex-col lg:gap-8">
                 <div className="w-full h-1/2 relative overflow-hidden">
 
                     <div className="absolute left-6 top-6 text-2xl font-suisse text-neutral-900">
@@ -27,7 +27,7 @@ export default function Location(): React.ReactElement {
 
 
                 <div className="w-full h-full overflow-hidden relative">
-                    <div className="mx-auto py-32 px-8 text-center">
+                    <div className="mx-auto py-16 lg:py-32 px-8 text-center">
                         <h2 className="font-suisse font-bold text-4xl lg:text-7xl">
                             YOUR NEXT DRESS AWAITS.
                         </h2>
@@ -39,14 +39,14 @@ export default function Location(): React.ReactElement {
                 alt="Location"
                 width={150}
                 height={400}
-                className="absolute z-10 left-1/2 -translate-x-1/2 -bottom-44"
+                className="w-24 lg:w-44 hidden lg:flex absolute z-10 left-1/2 -translate-x-1/2 lg:-bottom-44"
             />
             <Image
                 src="/imgs/stt.webp"
                 alt="Location"
-                width={60}
-                height={60}
-                className="absolute z-10 right-14  bottom-14 active:scale-95 transition-all duration-500"
+                width={50}
+                height={50}
+                className="absolute z-10 right-1/2 translate-x-1/2 lg:translate-x-0 lg:right-14  bottom-1 lg:bottom-14 active:scale-95 transition-all duration-500"
                 onClick={scrollTop}
             />
         </section>

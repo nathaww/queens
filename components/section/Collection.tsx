@@ -106,7 +106,7 @@ const Collections = () => {
         <section id="products" className="w-full min-h-screen pt-32 bg-background">
 
             <div className="max-w-[1440px] mx-auto relative">
-                <div className="flex flex-row justify-between items-center border-b border-gray-400 gap-8 mb-8 pb-4">
+                <div className="flex flex-col md:flex-row justify-between items-center lg:border-b border-gray-400 md:gap-8 mb-8 pb-4">
                     <div className="overflow-hidden">
                         <p className="text-center font-suisse uppercase text-4xl px-2 md:text-6xl lg:text-6xl xl:text-6xl text-black mb-6">
                             <span className="text-gray-500 font-suisse-mono font-thin ">Our</span> Collection
@@ -132,13 +132,13 @@ const Collections = () => {
                 </div>
 
 
-                <div className="py-2 lg:py-6 w-full">
+                <div className="lg:py-6 w-full">
                     <div className="relative">
                         <div
                             ref={containerRef}
                             className="w-full grid grid-cols-2 gap-1 md:flex md:flex-row md:gap-x-8 overflow-x-scroll overscroll-x-contain"
                         >
-                            <div className="flex flex-col gap-8 min-w-96">
+                            <div className="hidden lg:flex flex-col md:gap-8 min-w-96">
                                 <p className="text-4xl uppercase text-gray-500 font-suisse font-medium">
                                     Discover our collection
                                 </p>
@@ -155,7 +155,7 @@ const Collections = () => {
                                         <Image
                                             src={items.img}
                                             alt="queens collection image"
-                                            className="absolute imageCollection h-full w-full object-cover grayscale-100 hover:grayscale-0 transition-all duration-400 object-center hidden md:flex image"
+                                            className="absolute imageCollection h-full w-full object-cover grayscale-100 hover:grayscale-0 transition-all duration-400 object-center image"
                                             style={{ clipPath: "inset(0% 100% 0% 0%)" }}
                                             fill
                                         />

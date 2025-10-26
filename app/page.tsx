@@ -11,7 +11,7 @@ export default function Home() {
       <Hero />
       <OurStory />
       <Collections />
-      <Gallery/>
+      {/* <Gallery/> */}
       <Portfolio />
       <Location />
     </>

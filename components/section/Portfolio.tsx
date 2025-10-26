@@ -82,10 +82,10 @@ const Portfolio = () => {
     }, []);
 
     return (
-        <section id="products" className="w-full min-h-screen pt-32 bg-secondary">
+        <section id="products" className="w-full min-h-screen pt-12 lg:pt-32 bg-secondary">
 
             <div className="max-w-[1440px] mx-auto relative">
-                <div className="flex flex-col justify-between items-center gap-8 mb-8 pb-4">
+                <div className="flex flex-col justify-between items-center gap-8 mb-8 pb-4 px-2">
 
                     <div className="flex items-center justify-start w-full">
                         <div className="overflow-hidden max-w-4xl">
@@ -115,7 +115,7 @@ const Portfolio = () => {
                         </div>
                     </div>
 
-                    <div className="flex flex-col md:flex-row justify-between items-center w-full">
+                    <div className="hidden md:flex flex-col md:flex-row justify-between items-center w-full">
                         <a href="#products" className="opacity-0 text-2xl md:text-3xl tracking-wider text-amber-400 font-suisse-mono border-b-2 border-amber-400 pb-1">
                             Portfolio
                         </a>
@@ -127,7 +127,7 @@ const Portfolio = () => {
                 </div>
 
 
-                <div className="py-2 lg:py-6 w-full">
+                <div className="lg:py-6 w-full">
                     <div className="relative">
                         <div
                             ref={containerRef}
@@ -142,7 +142,7 @@ const Portfolio = () => {
                                         <Image
                                             src={items.img}
                                             alt="queens collection image"
-                                            className="absolute imageCollection h-full w-full object-cover grayscale-100 hover:grayscale-0 transition-all duration-400 object-center hidden md:flex image"
+                                            className="absolute imageCollection h-full w-full object-cover grayscale-100 hover:grayscale-0 transition-all duration-400 object-center image"
                                             style={{ clipPath: "inset(0% 100% 0% 0%)" }}
                                             width={520}
                                             height={720}
