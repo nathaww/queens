@@ -26,3 +26,7 @@
 .font-tempting {
   font-family: var(--font-tempting) !important;
 }
+
+.animate-spin-slow {
+  animation: spin 20s linear infinite;
+}

@@ -1,9 +1,8 @@
 "use client";
-import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/src/ScrollTrigger";
 import Image from "next/image";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useEffect, useRef } from "react";
 gsap.registerPlugin(ScrollTrigger);
 
 
@@ -33,26 +32,6 @@ const collection = [
 
 const Portfolio = () => {
     const containerRef = useRef(null);
-
-    const handleLeft = () => {
-        const scrollDistance = 650;
-        const scrollAmount = -scrollDistance;
-        gsap.to(containerRef.current, {
-            scrollLeft: `+=${scrollAmount}`,
-            duration: 1.5,
-            ease: "expo.inOut",
-        });
-    };
-
-    const handleRight = () => {
-        const scrollDistance = 650;
-        const scrollAmount = scrollDistance;
-        gsap.to(containerRef.current, {
-            scrollLeft: `+=${scrollAmount}`,
-            duration: 1.5,
-            ease: "expo.inOut",
-        });
-    };
 
     useEffect(() => {
         const animation = gsap
@@ -103,30 +82,46 @@ const Portfolio = () => {
     }, []);
 
     return (
-        <section id="products" className="w-full min-h-screen pt-32 bg-background">
+        <section id="products" className="w-full min-h-screen pt-32 bg-secondary">
 
             <div className="max-w-[1440px] mx-auto relative">
-                <div className="flex flex-row justify-between items-center border-b border-gray-400 gap-8 mb-8 pb-4">
-                    <div className="overflow-hidden">
-                        <p className="text-center font-suisse uppercase text-4xl px-2 md:text-6xl lg:text-6xl xl:text-6xl text-black mb-6">
-                            <span className="text-gray-500 font-suisse-mono font-thin ">Our</span> Collection
-                        </p>
+                <div className="flex flex-col justify-between items-center gap-8 mb-8 pb-4">
+
+                    <div className="flex items-center justify-start w-full">
+                        <div className="overflow-hidden max-w-4xl">
+                            <h2 className="font-suisse uppercase text-4xl md:text-6xl lg:text-7xl text-gray-300 mb-4">
+                                CRAFTED FOR MOMENTS
+                            </h2>
+                            <p className="text-sm md:text-base text-gray-400 max-w-2xl">
+                                Every bride we&apos;ve dressed carries a world within her and our work exists to honor it. This
+                                collection isn&apos;t about gowns alone, but about presence, confidence, and the art of becoming
+                                yourself on the day that matters most.
+                            </p>
+                        </div>
+                        <div className="w-40 h-40 md:w-44 md:h-44 relative">
+                            {/* circular text using SVG */}
+                            <svg viewBox="0 0 200 200" className="w-full h-full animate-spin-slow">
+                                <defs>
+                                    <path id="circlePath" d="M100,100 m-75,0 a75,75 0 1,1 150,0 a75,75 0 1,1 -150,0" />
+                                </defs>
+                                <g>
+                                    <text fill="#ecb463" fontSize="18" fontFamily="var(--font-suisse)">
+                                        <textPath href="#circlePath" startOffset="0">
+                                            QUEENS BRIDAL CLOSET • QUEENS BRIDAL CLOSET •
+                                        </textPath>
+                                    </text>
+                                </g>
+                            </svg>
+                        </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                        <p className="border border-gray-400 text-gray-400 uppercase h-max py-1 px-4">
-                            All Collection
-                        </p>
-                        <p className="text-white hover:scale-105 active:scale-90 transition-all duration-200 hidden sm:flex lg:flex xl:flex  sm:top-12 top-0 right-24 font-canela gap-1 items-center">
-                            <ArrowLeft
-                                onClick={handleLeft}
-                                className="text-3xl text-primary cursor-pointer"
-                            />
-                        </p>
-                        <p className="text-white hover:scale-105 active:scale-90 transition-all duration-200 hidden sm:flex lg:flex xl:flex  sm:top-12 top-0 right-14 font-canela gap-1 items-center">
-                            <ArrowRight
-                                onClick={handleRight}
-                                className="text-3xl text-primary cursor-pointer"
-                            />
+
+                    <div className="flex flex-row justify-between items-center w-full">
+                        <a href="#products" className="opacity-0 text-2xl md:text-3xl tracking-wider text-amber-400 font-suisse-mono border-b-2 border-amber-400 pb-1">
+                            Portfolio
+                        </a>
+                        <p className="font-suisse-mono uppercase text-5xl text-white">That outlive the day</p>
+                        <p className="text-primary text-3xl bg-black/20 text-center font-suisse-mono border-b border-white">
+                            Portfolio
                         </p>
                     </div>
                 </div>
@@ -138,14 +133,6 @@ const Portfolio = () => {
                             ref={containerRef}
                             className="w-full grid grid-cols-2 gap-1 md:flex md:flex-row md:gap-x-8 overflow-x-scroll overscroll-x-contain"
                         >
-                            <div className="flex flex-col gap-8 min-w-96">
-                                <p className="text-4xl uppercase text-gray-500 font-suisse font-medium">
-                                    Discover our collection
-                                </p>
-                                <p className="font-suisse-mono text-gray-500">
-                                    A curated collection for the bride, bringing together dresses, veils, accessories, and jewelry.
-                                </p>
-                            </div>
                             {collection?.map((items) => (
                                 <div
                                     key={items.id}

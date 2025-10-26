@@ -157,8 +157,7 @@ const Collections = () => {
                                             alt="queens collection image"
                                             className="absolute imageCollection h-full w-full object-cover grayscale-100 hover:grayscale-0 transition-all duration-400 object-center hidden md:flex image"
                                             style={{ clipPath: "inset(0% 100% 0% 0%)" }}
-                                            width={520}
-                                            height={720}
+                                            fill
                                         />
                                     </div>
                                 </div>
