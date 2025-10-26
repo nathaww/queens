@@ -1,10 +1,11 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/src/ScrollTrigger";
-import Image from "next/image";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-gsap.registerPlugin(ScrollTrigger);
+import Image from "next/image";
+import { useRef } from "react";
+
+gsap.registerPlugin(useGSAP);
 
 
 const collection = [
@@ -33,7 +34,7 @@ const collection = [
 
 const Collections = () => {
     const containerRef = useRef(null);
-
+    const imgRef = useRef(null);
     const handleLeft = () => {
         const scrollDistance = 650;
         const scrollAmount = -scrollDistance;
@@ -53,54 +54,6 @@ const Collections = () => {
             ease: "expo.inOut",
         });
     };
-
-    useEffect(() => {
-        const animation = gsap
-            .timeline({
-                scrollTrigger: {
-                    trigger: "#products",
-                    start: "top 60%",
-                    markers: false,
-                },
-            })
-            .to(".image", {
-                clipPath: "inset(0% 0% 0% 0%)",
-                duration: 1.5,
-                ease: "expo.inOut",
-                stagger: 0.1,
-            })
-            .from(
-                ".bgFlower",
-                {
-                    autoAlpha: 0,
-                    duration: 1.2,
-                    ease: "expo.inOut",
-                },
-                "-=1.5"
-            );
-
-        return () => {
-            animation.kill();
-        };
-    }, []);
-
-    useEffect(() => {
-        const animation = gsap
-            .timeline({
-                scrollTrigger: {
-                    trigger: "#products",
-                    start: "top center",
-                    markers: false,
-                    scrub: 1.9,
-                },
-            })
-            .to(".imageCollection", {
-                scale: 1.3,
-            });
-        return () => {
-            animation.kill();
-        };
-    }, []);
 
     return (
         <section id="products" className="w-full min-h-screen pt-32 bg-background">
@@ -153,10 +106,11 @@ const Collections = () => {
                                 >
                                     <div className="mx-auto h-[350px] w-full md:h-[400px] md:w-[290px] xl:w-[480px] xl:h-[650px] overflow-hidden flex justify-center relative">
                                         <Image
+                                            ref={imgRef}
                                             src={items.img}
                                             alt="queens collection image"
-                                            className="absolute imageCollection h-full w-full object-cover grayscale-100 hover:grayscale-0 transition-all duration-400 object-center image"
-                                            style={{ clipPath: "inset(0% 100% 0% 0%)" }}
+                                            className=" absolute imageCollection h-full w-full object-cover grayscale-100 hover:grayscale-0 transition-all duration-400 object-center image"
+                                            style={{ clipPath: "inset(12% 12% 12% 12%)" }}
                                             fill
                                         />
                                     </div>

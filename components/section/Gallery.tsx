@@ -1,37 +1,81 @@
-import React from "react";
+"use client"
+import Image from 'next/image';
+import { useScroll, useTransform, motion } from 'framer-motion';
+import { useRef } from 'react';
 
-/**
- * Full-bleed gallery section that fills the viewport width and height.
- *
- * Notes:
- * - Uses divs with CSS background images so missing files don't break the build.
- * - Replace the image paths in the `images` array to match your `public/imgs` files.
- */
-export default function Gallery(): React.ReactElement {
-  const images = [
-    "/imgs/gallery-1.jpg",
-    "/imgs/gallery-2.jpg",
-    "/imgs/gallery-3.jpg",
-    "/imgs/gallery-4.jpg",
-    "/imgs/gallery-5.jpg",
-    "/imgs/gallery-6.jpg",
-    "/imgs/gallery-7.jpg",
-    "/imgs/gallery-8.jpg",
-  ];
+export default function Gallery() {
+    
+    const container = useRef(null);
+    const { scrollYProgress } = useScroll({
+        target: container,
+        offset: ['start start', 'end end']
+    })
 
-  return (
-    <section className="w-screen h-screen relative overflow-hidden">
-      {/* full-bleed grid: 7 columns, auto rows stretch to fill height */}
-      <div
-        className="absolute inset-0 p-4"
-        style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: "1rem", gridAutoRows: "1fr" }}
-      >
-        {/* Example layout — adjust colSpan/rowSpan to taste */}
-        <div style={{ gridColumn: "span 1", gridRow: "span 2" }} className="relative overflow-hidden rounded-sm bg-gray-100">
-          <div className="absolute inset-0 bg-center bg-cover" style={{ backgroundImage: `url(${images[0]})` }} />
+    const scale4 = useTransform(scrollYProgress, [0, 1], [1, 4]);
+    const scale5 = useTransform(scrollYProgress, [0, 1], [1, 5]);
+    const scale6 = useTransform(scrollYProgress, [0, 1], [1, 6]);
+    const scale8 = useTransform(scrollYProgress, [0, 1], [1, 8]);
+    const scale9 = useTransform(scrollYProgress, [0, 1], [1, 9]);
+
+    const pictures = [
+        {
+            src: '/imgs/collection1.webp',
+            scale: scale4
+        },
+        {
+            src: '/imgs/collection2.webp',
+            scale: scale5
+        },
+        {
+            src: '/imgs/collection3.webp',
+            scale: scale6
+        },
+        {
+            src: '/imgs/collection4.webp',
+            scale: scale5
+        },
+        {
+            src: '/imgs/collection.webp',
+            scale: scale6
+        },
+        {
+            src: '/imgs/story1.webp',
+            scale: scale8
+        },
+        {
+            src: '/imgs/story2.webp',
+            scale: scale9
+        }
+    ]
+
+    const itemStyles: Array<React.CSSProperties> = [
+        { width: '25vw', height: '25vh' },
+        { top: '-30vh', left: '5vw', width: '35vw', height: '30vh' },
+        { top: '-10vh', left: '-25vw', width: '20vw', height: '45vh' },
+        { left: '27.5vw', width: '25vw', height: '25vh' },
+        { top: '27.5vh', left: '5vw', width: '20vw', height: '25vh' },
+        { top: '27.5vh', left: '-22.5vw', width: '30vw', height: '25vh' },
+        { top: '22.5vh', left: '25vw', width: '15vw', height: '15vh' },
+    ];
+
+    return (
+        <div ref={container} className="relative h-[300vh] bg-background">
+            <div className="sticky top-0 h-screen overflow-hidden">
+                {pictures.map(({ src, scale }, index) => (
+                    <motion.div
+                        key={index}
+                        style={{ scale }}
+                        className="absolute inset-0 flex items-center justify-center"
+                    >
+                        <div
+                            className="relative overflow-hidden"
+                            style={itemStyles[index]}
+                        >
+                            <Image src={src} fill alt={`gallery-${index}`} className="object-cover grayscale-100 hover:grayscale-0 duration-500" />
+                        </div>
+                    </motion.div>
+                ))}
+            </div>
         </div>
-
-      </div>
-    </section>
-  );
+    );
 }

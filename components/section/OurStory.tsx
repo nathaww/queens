@@ -1,14 +1,14 @@
-import React from "react";
 import Image from "next/image";
 
 export default function OurStory(): React.ReactElement {
+
     return (
         <section className="mx-auto py-28 bg-secondary min-h-screen">
             <div className="max-w-[1440px] mx-auto grid grid-cols-12 gap-8">
                 <div className="hidden lg:flex col-span-4">
                     <div className="w-full h-full relative overflow-hidden">
                         <Image
-                            src="/imgs/story1.webp"
+                            src="/imgs/story-section-image.jpg"
                             alt="Bride and Groom"
                             width={520}
                             height={1200}
@@ -46,7 +46,7 @@ export default function OurStory(): React.ReactElement {
 
                         <div className="hidden lg:flex w-full relative overflow-hidden">
                             <Image
-                                src="/imgs/story2.webp"
+                                src="/imgs/story2.jpg"
                                 alt="Gown on Display"
                                 width={480}
                                 height={500}

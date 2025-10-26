@@ -3,8 +3,8 @@ import NavBar from "@/components/layout/NavBar";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import SmoothScrolling from "@/util/SmoothScroll";
 
-// Local font imports from /public/fonts
 const suisse = localFont({
   src: [
     { path: "../public/fonts/SuisseMedium.ttf", weight: "500", style: "normal" },
@@ -41,9 +41,11 @@ export default function RootLayout({
       <body
         className={`${suisse.variable} ${suisseMono.variable} ${tempting.variable} antialiased`}
       >
-        <NavBar />
-        {children}
-        <Footer />
+        <SmoothScrolling>
+          <NavBar />
+          {children}
+          <Footer />
+        </SmoothScrolling>
       </body>
     </html>
   );
