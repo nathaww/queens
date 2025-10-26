@@ -115,7 +115,7 @@ const Portfolio = () => {
                         </div>
                     </div>
 
-                    <div className="flex flex-row justify-between items-center w-full">
+                    <div className="flex flex-col md:flex-row justify-between items-center w-full">
                         <a href="#products" className="opacity-0 text-2xl md:text-3xl tracking-wider text-amber-400 font-suisse-mono border-b-2 border-amber-400 pb-1">
                             Portfolio
                         </a>

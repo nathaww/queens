@@ -46,7 +46,7 @@ const Hero = () => {
             onMouseMove={handleMove}
             onMouseEnter={() => setIsInside(true)}
             onMouseLeave={() => setIsInside(false)}
-            className="relative min-h-screen bg-[url('/imgs/hero-bg.webp')] bg-no-repeat bg-cover flex justify-center items-end py-32"
+            className="relative min-h-screen bg-[url('/imgs/hero-bg.webp')] bg-no-repeat bg-center bg-cover flex justify-center items-end py-32"
         >
             <div className="w-screen h-screen bg-black/40 absolute top-0 left-0 pointer-events-none"></div>
 
@@ -55,7 +55,7 @@ const Hero = () => {
 
             {/* pass follow props to GlassButton; when isInside is true we follow the cursor, otherwise we animate back to anchor */}
             <GlassButton
-                className=""
+                className="hidden lg:flex"
                 text1="View"
                 text2="Products"
                 followPos={followPos}
@@ -65,14 +65,14 @@ const Hero = () => {
 
             <div className="relative z-10 flex flex-col justify-center gap-6 items-center text-white">
                 <p className=" font-(--font-suisse-mono) uppercase">The Curated Atelier</p>
-                <h1 className="font-(--font-tempting) text-5xl font-tempting">Unforgettable Moments</h1>
-                <p className="max-w-[780px] text-center font-suisse-mono text-lg">
+                <h1 className="text-4xl md:text-5xl font-tempting text-center">Unforgettable Moments</h1>
+                <p className="max-w-[780px] text-center font-suisse-mono text-sm md:text-lg">
                     Step into your dream day without compromise. We offer an expertly curated collection of
                     high-fashion bridal and evening wear, making luxury accessible for the most cherished occasions.
                 </p>
             </div>
 
-            <LandingCard className="absolute bottom-6 right-12" />
+            <LandingCard className="hidden lg:flex absolute bottom-6 right-12" />
 
         </section>
     )
