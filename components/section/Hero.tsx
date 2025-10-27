@@ -1,4 +1,5 @@
 import GlassButton from "../ui/GlassButton/GlassButton";
+import InversionLens from "../ui/InversionLens/InversionLens";
 
 
 const Hero = () => {
@@ -6,11 +7,13 @@ const Hero = () => {
 
     return (
         <section
-            className="relative min-h-screen bg-[url('/imgs/hero.jpg')] bg-no-repeat bg-center bg-cover flex justify-center items-end py-12"
+            className="relative min-h-screen flex justify-center items-end"
         >
-            <div className="w-screen h-screen bg-black/50 absolute top-0 left-0 pointer-events-none"></div>
+            <InversionLens className="" src="/imgs/hero.jpg" />
 
-            <div className="relative z-10 flex flex-col justify-center gap-6 items-center text-white">
+            {/* <div className="w-screen h-screen bg-black/50 absolute top-0 left-0 pointer-events-none"></div> */}
+
+            <div className="relative mb-12 z-10 flex flex-col justify-center gap-6 items-center text-white">
                 <p className=" font-(--font-suisse-mono) uppercase">The Curated Atelier</p>
                 <h1 className="text-4xl md:text-5xl font-tempting text-center">Unforgettable Moments</h1>
                 <p className="max-w-[780px] text-center font-suisse-mono text-sm md:text-lg">
