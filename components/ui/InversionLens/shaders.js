@@ -57,11 +57,10 @@ export const fragmentShader = `
       uv.y
     );
 
-    vec4 tex = texture2D(u_texture, texCoord);
-
-    // Convert to grayscale
-    float gray = dot(tex.rgb, vec3(0.299, 0.587, 0.114));
-    vec3 grayColor = vec3(gray);
+  vec4 tex = texture2D(u_texture, texCoord);
+  float gray = dot(tex.rgb, vec3(0.299, 0.587, 0.114));
+  // Use grayscale instead of inversion
+  vec3 grayscale = vec3(gray);
 
     vec2 correctedUV = uv;
     correctedUV.x *= screenAspect;
@@ -69,12 +68,12 @@ export const fragmentShader = `
     correctedMouse.x *= screenAspect;
 
     float dist = distance(correctedUV, correctedMouse);
+    
     float jaggedDist = dist + (turbulence(uv * 25.0 + u_time * u_speed) - 0.5) * u_turbulenceIntensity;
+    
     float mask = step(jaggedDist, u_radius);
 
-    // Color inside the mask, grayscale outside
-    vec3 finalColor = mix(tex.rgb, grayColor, 1.0 - mask);
-
+    vec3 finalColor = mix(grayscale, tex.rgb, 1.0 - mask);
     gl_FragColor = vec4(finalColor, 1.0);
   }
 `;

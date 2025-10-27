@@ -2,7 +2,8 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/src/ScrollTrigger";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
+import { motion, useMotionValue } from "framer-motion";
 gsap.registerPlugin(ScrollTrigger);
 
 
@@ -31,55 +32,6 @@ const collection = [
 ]
 
 const Portfolio = () => {
-    const containerRef = useRef(null);
-
-    useEffect(() => {
-        const animation = gsap
-            .timeline({
-                scrollTrigger: {
-                    trigger: "#products",
-                    start: "top 60%",
-                    markers: false,
-                },
-            })
-            .to(".image", {
-                clipPath: "inset(0% 0% 0% 0%)",
-                duration: 1.5,
-                ease: "expo.inOut",
-                stagger: 0.1,
-            })
-            .from(
-                ".bgFlower",
-                {
-                    autoAlpha: 0,
-                    duration: 1.2,
-                    ease: "expo.inOut",
-                },
-                "-=1.5"
-            );
-
-        return () => {
-            animation.kill();
-        };
-    }, []);
-
-    useEffect(() => {
-        const animation = gsap
-            .timeline({
-                scrollTrigger: {
-                    trigger: "#products",
-                    start: "top center",
-                    markers: false,
-                    scrub: 1.9,
-                },
-            })
-            .to(".imageCollection", {
-                scale: 1.3,
-            });
-        return () => {
-            animation.kill();
-        };
-    }, []);
 
     return (
         <section id="products" className="w-full min-h-screen pt-12 lg:pt-32 bg-secondary">
@@ -129,28 +81,7 @@ const Portfolio = () => {
 
                 <div className="lg:py-6 w-full">
                     <div className="relative">
-                        <div
-                            ref={containerRef}
-                            className="w-full grid grid-cols-2 gap-1 md:flex md:flex-row md:gap-x-8 overflow-x-scroll overscroll-x-contain"
-                        >
-                            {collection?.map((items) => (
-                                <div
-                                    key={items.id}
-                                    className="flex flex-col justify-center relative"
-                                >
-                                    <div className="mx-auto h-[350px] w-full md:h-[400px] md:w-[290px] xl:w-[480px] xl:h-[650px] overflow-hidden flex justify-center relative">
-                                        <Image
-                                            src={items.img}
-                                            alt="queens collection image"
-                                            className="absolute imageCollection h-full w-full object-cover grayscale-100 hover:grayscale-0 transition-all duration-400 object-center image"
-                                            style={{ clipPath: "inset(0% 100% 0% 0%)" }}
-                                            width={520}
-                                            height={720}
-                                        />
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+                                <MarqueeGallery items={collection} />
                     </div>
                 </div>
             </div>
@@ -159,3 +90,87 @@ const Portfolio = () => {
 };
 
 export default Portfolio;
+
+        function MarqueeGallery({ items }: { items: { id: number; name: string; img: string }[] }) {
+            const trackRef = useRef<HTMLDivElement | null>(null);
+            const x = useMotionValue(0);
+            // force leftward motion only
+            const directionRef = useRef<number>(-1);
+            const speed = 60; // px per second
+            const trackWidth = useRef<number>(0);
+            const pausedRef = useRef<boolean>(false);
+            const rafRef = useRef<number | null>(null);
+
+            useEffect(() => {
+                const track = trackRef.current;
+                if (!track) return;
+
+                // measure one copy width
+                const measure = () => {
+                    trackWidth.current = track.scrollWidth / 2 || 0;
+                };
+                measure();
+                const onResize = () => measure();
+                window.addEventListener('resize', onResize);
+
+                let lastTime = performance.now();
+                const tick = (t: number) => {
+                    const dt = (t - lastTime) / 1000;
+                    lastTime = t;
+
+                    if (!pausedRef.current) {
+                        const cur = x.get();
+                        let next = cur + directionRef.current * speed * dt;
+                        // wrap around when scrolled past one track width
+                        if (trackWidth.current > 0) {
+                            if (-next >= trackWidth.current) {
+                                next += trackWidth.current;
+                            }
+                        }
+                        x.set(next);
+                    }
+
+                    rafRef.current = requestAnimationFrame(tick);
+                };
+                rafRef.current = requestAnimationFrame(tick);
+
+                return () => {
+                    window.removeEventListener('resize', onResize);
+                    if (rafRef.current != null) cancelAnimationFrame(rafRef.current);
+                };
+            }, [x]);
+
+            // render two copies of the list for seamless loop
+            const doubled = [...items, ...items];
+
+            return (
+                <div className="w-full overflow-hidden">
+                    <div ref={trackRef} className="relative">
+                        <motion.div style={{ x }} className="flex items-start whitespace-nowrap will-change-transform">
+                            {doubled.map((it, idx) => (
+                                <div
+                                    key={`${it.id}-${idx}`}
+                                    className="flex flex-col justify-center relative px-2"
+                                    // pause on pointer hover/touch and when focused for accessibility
+                                    onPointerEnter={() => { pausedRef.current = true; }}
+                                    onPointerLeave={() => { pausedRef.current = false; }}
+                                    onFocus={() => { pausedRef.current = true; }}
+                                    onBlur={() => { pausedRef.current = false; }}
+                                    tabIndex={0}
+                                >
+                                    <div className="mx-auto h-[350px] w-full md:h-[400px] md:w-[290px] xl:w-[480px] xl:h-[650px] overflow-hidden flex justify-center relative">
+                                        <Image
+                                            src={it.img}
+                                            alt={it.name}
+                                            className="absolute imageCollection h-full w-full object-cover grayscale-100 hover:grayscale-0 transition-all duration-400 object-center image"
+                                            width={520}
+                                            height={720}
+                                        />
+                                    </div>
+                                </div>
+                            ))}
+                        </motion.div>
+                    </div>
+                </div>
+            );
+        }
