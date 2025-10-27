@@ -157,7 +157,7 @@ function MarqueeGallery({ items }: { items: { id: number; name: string; img: str
                             onBlur={() => { pausedRef.current = false; }}
                             tabIndex={0}
                         >
-                            <div className="mx-auto h-[350px] w-full md:h-[400px] md:w-[290px] xl:w-[480px] xl:h-[650px] overflow-hidden flex justify-center relative">
+                            <div className="mx-auto h-[350px] md:h-[400px] w-[290px] xl:w-[480px] xl:h-[650px] overflow-hidden flex justify-center relative">
                                 <Image
                                     src={it.img}
                                     alt={it.name}
