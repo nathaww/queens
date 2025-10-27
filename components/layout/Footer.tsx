@@ -8,7 +8,7 @@ const Footer = (): React.ReactElement => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="space-y-8">
-            <p className="text-6xl font-suisse-mono max-w-xl">Let&apos;s Discuss details</p>
+            <p className="text-4xl md:text-6xl font-suisse-mono max-w-xl">Let&apos;s Discuss details</p>
             <div className="w-full grid md:grid-cols-3 text-white/70 font-suisse-mono gap-4 uppercase">
               <div className="flex flex-col">
                 <span>Location</span>

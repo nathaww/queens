@@ -56,7 +56,7 @@ const Collections = () => {
     };
 
     return (
-        <section id="products" className="w-full min-h-screen pt-32 bg-background">
+        <section id="products" className="w-full min-h-screen pt-12 md:pt-32 bg-background">
 
             <div className="max-w-[1440px] mx-auto relative">
                 <div className="flex flex-col md:flex-row justify-between items-center lg:border-b border-gray-400 md:gap-8 mb-8 pb-4">
@@ -110,7 +110,7 @@ const Collections = () => {
                                             src={items.img}
                                             alt="queens collection image"
                                             className=" absolute imageCollection h-full w-full object-cover grayscale-100 hover:grayscale-0 transition-all duration-400 object-center image"
-                                            style={{ clipPath: "inset(12% 12% 12% 12%)" }}
+                                       
                                             fill
                                         />
                                     </div>

@@ -81,7 +81,7 @@ const Portfolio = () => {
 
                 <div className="lg:py-6 w-full">
                     <div className="relative">
-                                <MarqueeGallery items={collection} />
+                        <MarqueeGallery items={collection} />
                     </div>
                 </div>
             </div>
@@ -91,86 +91,85 @@ const Portfolio = () => {
 
 export default Portfolio;
 
-        function MarqueeGallery({ items }: { items: { id: number; name: string; img: string }[] }) {
-            const trackRef = useRef<HTMLDivElement | null>(null);
-            const x = useMotionValue(0);
-            // force leftward motion only
-            const directionRef = useRef<number>(-1);
-            const speed = 60; // px per second
-            const trackWidth = useRef<number>(0);
-            const pausedRef = useRef<boolean>(false);
-            const rafRef = useRef<number | null>(null);
+function MarqueeGallery({ items }: { items: { id: number; name: string; img: string }[] }) {
+    const trackRef = useRef<HTMLDivElement | null>(null);
+    const x = useMotionValue(0);
+    // force leftward motion only
+    const directionRef = useRef<number>(-1);
+    const speed = 60; // px per second
+    const trackWidth = useRef<number>(0);
+    const pausedRef = useRef<boolean>(false);
+    const rafRef = useRef<number | null>(null);
 
-            useEffect(() => {
-                const track = trackRef.current;
-                if (!track) return;
+    useEffect(() => {
+        const track = trackRef.current;
+        if (!track) return;
 
-                // measure one copy width
-                const measure = () => {
-                    trackWidth.current = track.scrollWidth / 2 || 0;
-                };
-                measure();
-                const onResize = () => measure();
-                window.addEventListener('resize', onResize);
+        // measure one copy width
+        const measure = () => {
+            trackWidth.current = track.scrollWidth / 2 || 0;
+        };
+        measure();
+        const onResize = () => measure();
+        window.addEventListener('resize', onResize);
 
-                let lastTime = performance.now();
-                const tick = (t: number) => {
-                    const dt = (t - lastTime) / 1000;
-                    lastTime = t;
+        let lastTime = performance.now();
+        const tick = (t: number) => {
+            const dt = (t - lastTime) / 1000;
+            lastTime = t;
 
-                    if (!pausedRef.current) {
-                        const cur = x.get();
-                        let next = cur + directionRef.current * speed * dt;
-                        // wrap around when scrolled past one track width
-                        if (trackWidth.current > 0) {
-                            if (-next >= trackWidth.current) {
-                                next += trackWidth.current;
-                            }
-                        }
-                        x.set(next);
+            if (!pausedRef.current) {
+                const cur = x.get();
+                let next = cur + directionRef.current * speed * dt;
+                // wrap around when scrolled past one track width
+                if (trackWidth.current > 0) {
+                    if (-next >= trackWidth.current) {
+                        next += trackWidth.current;
                     }
+                }
+                x.set(next);
+            }
 
-                    rafRef.current = requestAnimationFrame(tick);
-                };
-                rafRef.current = requestAnimationFrame(tick);
+            rafRef.current = requestAnimationFrame(tick);
+        };
+        rafRef.current = requestAnimationFrame(tick);
 
-                return () => {
-                    window.removeEventListener('resize', onResize);
-                    if (rafRef.current != null) cancelAnimationFrame(rafRef.current);
-                };
-            }, [x]);
+        return () => {
+            window.removeEventListener('resize', onResize);
+            if (rafRef.current != null) cancelAnimationFrame(rafRef.current);
+        };
+    }, [x]);
 
-            // render two copies of the list for seamless loop
-            const doubled = [...items, ...items];
+    // render two copies of the list for seamless loop
+    const doubled = [...items, ...items];
 
-            return (
-                <div className="w-full overflow-hidden">
-                    <div ref={trackRef} className="relative">
-                        <motion.div style={{ x }} className="flex items-start whitespace-nowrap will-change-transform">
-                            {doubled.map((it, idx) => (
-                                <div
-                                    key={`${it.id}-${idx}`}
-                                    className="flex flex-col justify-center relative px-2"
-                                    // pause on pointer hover/touch and when focused for accessibility
-                                    onPointerEnter={() => { pausedRef.current = true; }}
-                                    onPointerLeave={() => { pausedRef.current = false; }}
-                                    onFocus={() => { pausedRef.current = true; }}
-                                    onBlur={() => { pausedRef.current = false; }}
-                                    tabIndex={0}
-                                >
-                                    <div className="mx-auto h-[350px] w-full md:h-[400px] md:w-[290px] xl:w-[480px] xl:h-[650px] overflow-hidden flex justify-center relative">
-                                        <Image
-                                            src={it.img}
-                                            alt={it.name}
-                                            className="absolute imageCollection h-full w-full object-cover grayscale-100 hover:grayscale-0 transition-all duration-400 object-center image"
-                                            width={520}
-                                            height={720}
-                                        />
-                                    </div>
-                                </div>
-                            ))}
-                        </motion.div>
-                    </div>
-                </div>
-            );
-        }
+    return (
+        <div className="w-full overflow-hidden">
+            <div ref={trackRef} className="relative">
+                <motion.div style={{ x }} className="flex items-start whitespace-nowrap will-change-transform">
+                    {doubled.map((it, idx) => (
+                        <div
+                            key={`${it.id}-${idx}`}
+                            className="flex flex-col justify-center relative px-2"
+                            onPointerEnter={() => { pausedRef.current = true; }}
+                            onPointerLeave={() => { pausedRef.current = false; }}
+                            onFocus={() => { pausedRef.current = true; }}
+                            onBlur={() => { pausedRef.current = false; }}
+                            tabIndex={0}
+                        >
+                            <div className="mx-auto h-[350px] w-full md:h-[400px] md:w-[290px] xl:w-[480px] xl:h-[650px] overflow-hidden flex justify-center relative">
+                                <Image
+                                    src={it.img}
+                                    alt={it.name}
+                                    className="absolute imageCollection h-full w-full object-cover grayscale-100 hover:grayscale-0 transition-all duration-400 object-center"
+                                    width={520}
+                                    height={720}
+                                />
+                            </div>
+                        </div>
+                    ))}
+                </motion.div>
+            </div>
+        </div>
+    );
+}

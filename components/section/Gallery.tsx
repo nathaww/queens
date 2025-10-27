@@ -39,7 +39,7 @@ export default function Gallery() {
             scale: scale6
         },
         {
-            src: '/imgs/story1.webp',
+            src: '/imgs/sec1.webp',
             scale: scale8
         },
         {

@@ -28,7 +28,7 @@ export default function Location(): React.ReactElement {
 
                 <div className="w-full h-full overflow-hidden relative">
                     <div className="mx-auto py-16 lg:py-32 px-8 text-center">
-                        <h2 className="font-suisse font-bold text-4xl lg:text-7xl">
+                        <h2 className="font-suisse font-bold text-3xl lg:text-7xl">
                             YOUR NEXT DRESS AWAITS.
                         </h2>
                     </div>

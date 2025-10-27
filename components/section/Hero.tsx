@@ -7,13 +7,13 @@ const Hero = () => {
 
     return (
         <section
-            className="relative min-h-screen flex justify-center items-end"
+            className="relative min-h-screen flex justify-center items-end pb-12"
         >
             <InversionLens className="" src="/imgs/hero.jpg" />
 
             {/* <div className="w-screen h-screen bg-black/50 absolute top-0 left-0 pointer-events-none"></div> */}
 
-            <div className="relative mb-12 z-10 flex flex-col justify-center gap-6 items-center text-white">
+            <div className="relative z-10 flex flex-col justify-center gap-6 items-center text-white">
                 <p className=" font-(--font-suisse-mono) uppercase">The Curated Atelier</p>
                 <h1 className="text-4xl md:text-5xl font-tempting text-center">Unforgettable Moments</h1>
                 <p className="max-w-[780px] text-center font-suisse-mono text-sm md:text-lg">
