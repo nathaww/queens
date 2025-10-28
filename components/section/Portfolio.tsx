@@ -50,7 +50,7 @@ const Portfolio = () => {
                                 yourself on the day that matters most.
                             </p>
                         </div>
-                        <div className="w-40 h-40 md:w-44 md:h-44 relative">
+                        <div className="hidden lg:flex w-40 h-40 md:w-44 md:h-44 relative">
                             {/* circular text using SVG */}
                             <svg viewBox="0 0 200 200" className="w-full h-full animate-spin-slow">
                                 <defs>
